@@ -20,6 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 class packet;
+//rand int count;
+//rand byte master[$];
+//rand bit[7:0] data[];
+
+
 rand bit[1:0] mode;
 randc bit[1:0] key;
 
