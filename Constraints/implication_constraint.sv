@@ -25,9 +25,18 @@ class ABC;
   rand bit [3:0] len;
 
   constraint c_mode { mode == 2 -> len > 10; }
+  
+  //If else constraint construct
+  constraint c_len 	{ if(mode == 0)
+  							len <10;
+  					}
 endclass
 
-module tb;
+/*An implication operator -> can be used 
+in a constraint expression to show conditional relationship between two variables.
+*/
+
+module implication_constraint();
   initial begin
     ABC abc = new;
     for(int i = 0; i < 10; i++) begin
