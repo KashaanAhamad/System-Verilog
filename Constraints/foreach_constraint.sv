@@ -57,7 +57,20 @@ endclass
 
 //Multidimensional Array/Queues
 class multidimension;
-	rand bit [4:0][3:0] md_array[2][5];	//multidimension array
+	rand bit [4:0][3:0] md_array[2][5];	//multidimension static array
+	rand bit [3:0] d_md_array[][];		//multidimension dynamic array
+	
+	constraint c_d_md_array{	//first assign the size
+							d_md_array.size() ==2;
+							foreach(d_md_array[i]){
+								d_md_array[i].size() inside {[1:5]};
+								// Iterate over the second dimension
+								foreach(d_md_array[i][j]){
+									// Assign constraints for values to the second dimension
+									d_md_array[i][j] inside {[1:10]};
+									}
+							}
+						}
 	
 	constraint c_md_array {
 		foreach(md_array[i]){
@@ -71,17 +84,27 @@ class multidimension;
 				}
 			}
 		}
+		
+	
 endclass
 
 
 
 module foreach_constr( );
 FE fe;
+multidimension md;
 	initial begin
 		fe=new();
-		fe.randomize();
-		$display("array=%p",fe.array);
+		md=new();
 		
+		fe.randomize();
+		md.randomize();
+		$display("array=%p",fe.array);
+		//dynamic array and queue
 		$display("darray=%p queues=%p",fe.darray,fe.queues);
+		//Multi dimension array
+		$display ("md_array = %p", md.md_array);
+		//Multi dimension dynamic array
+		$display ("d_md_array = %p", md.d_md_array);
 	end
 endmodule
