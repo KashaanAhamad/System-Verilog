@@ -21,7 +21,7 @@
 //FIXED SIZE ARRAY
 
 // Define the Packet class
-class Packet;
+class Packet_arr;
     int count;
     // Constructor to initialize count
     function new(int c = 0);
@@ -33,13 +33,13 @@ endclass
 module array_of_Object( );
 
  	// Fixed array
-    Packet fixed_array[5];
+    Packet_arr fixed_array[5];
 
     // Dynamic array
-    Packet dynamic_array[];
+    Packet_arr dynamic_array[];
 
     // Associative array
-    Packet assoc_array[string];
+    Packet_arr assoc_array[string];
     
     initial begin
         //---------------- FIXED ARRAY ----------------//
@@ -74,25 +74,8 @@ module array_of_Object( );
         foreach (dynamic_array[i]) begin
             $display("dynamic_array[%0d].count = %0d", i, dynamic_array[i].count);
         end
-    end
-    
-
-    initial begin
-        $display(" --- Dynamic Array Example ---");
-
-        // Initialize the dynamic array with a specific size
-        dynamic_array = new[3]; // Creates space for 3 Packet references
-
-        // Initialize each element of the dynamic array
-        for (int i = 0; i < dynamic_array.size(); i++) begin
-            dynamic_array[i] = new(i + 1); // Create new Packet objects
-        end
-
-        // Access and display data
-        foreach (dynamic_array[i]) begin
-            $display("dynamic_array[%0d].count = %0d", i, dynamic_array[i].count);
-             
-            
+           
+                  
         //---------------- ASSOCIATIVE ARRAY ----------------//
         $display("\n--- Associative Array Example ---");
 
@@ -114,7 +97,8 @@ module array_of_Object( );
         if (assoc_array.exists("packet_B")) begin
             $display("Packet_B exists in the associative array.");
         end       
-    end
+    
 end
+   
     
 endmodule
